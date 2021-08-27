@@ -1,0 +1,101 @@
+@model MusicDating.Models.Entities.Ensemble
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Ensemble</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Picture)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Homepage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Homepage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Postcode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Postcode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Size.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PracticeFrequency)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PracticeFrequency.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EnsembleGenres)
+        </dt>
+
+            <dd class = "col-sm-10">
+                @foreach (var genre in Model.EnsembleGenres)
+                                    {
+                                    
+                                    @if (genre.EnsembleId == Model.EnsembleId)
+                                    {
+                                        <span class="badge badge-warning">@Html.DisplayFor(modelItem => genre.Genre.Name)</span>
+                                    } <!-- closing if genre -->
+                                    
+                                    }
+
+            </dd>
+
+
+
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlayRegular)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlayRegular)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PlayProject)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PlayProject)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="EnsembleId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

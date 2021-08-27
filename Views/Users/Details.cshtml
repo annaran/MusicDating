@@ -1,0 +1,199 @@
+@using System.Security.Claims
+
+
+@model MusicDating.Models.ViewModels.UserProfileVm
+
+
+@{
+    ViewData["Title"] = "User profile";
+  
+   var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+}
+
+
+<h1>User Profile</h1>
+
+
+
+<div class="container">
+
+@* -----------------------------  Instruments ------------------------------ *@
+
+        <div class="card border-secondary col col-12 col-md-12">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">  
+                    <h5 class="card-title brandfont">  
+                          User details
+                    </h5>     
+
+                  <div > <!-- start new instrument-->
+               
+                    <a class="btn btn-secondary" asp-action="Edit" asp-controller="Users" asp-route-id="@userId">Edit</a>
+     
+                    </div> 
+
+
+
+                </div>
+
+                @foreach (var usr in Model.User)
+            {           
+
+                    <div class="card-text d-flex justify-content-between"> 
+                    <h5 class="card-text">Name</h5>
+                    <h5 class="card-text">@Html.DisplayFor(modelItem => usr.FirstName) @Html.DisplayFor(modelItem => usr.LastName) </h5>            
+                    </div>  
+
+                    <div class="card-text d-flex justify-content-between"> 
+                    <h5 class="card-text">@Html.DisplayNameFor(modelItem => usr.City) </h5> 
+                    <h5 class="card-text">@Html.DisplayFor(modelItem => usr.City) </h5>            
+                    </div>  
+
+                    <div class="card-text d-flex justify-content-between"> 
+                    <h5 class="card-text">@Html.DisplayNameFor(modelItem => usr.Postcode) </h5> 
+                    <h5 class="card-text">@Html.DisplayFor(modelItem => usr.Postcode) </h5>            
+                    </div>  
+
+
+                    <div class="card-text d-flex justify-content-between"> 
+                    <h5 class="card-text">@Html.DisplayNameFor(modelItem => usr.Description) </h5> 
+                    <h5 class="card-text">@Html.DisplayFor(modelItem => usr.Description) </h5>            
+                    </div>  
+
+ 
+                      
+            }
+            
+
+
+            </div>
+        </div> 
+
+
+@* -----------------------------  Instruments ------------------------------ *@
+
+        <div class="card border-secondary col col-12 col-md-12">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">  
+                    <h5 class="card-title brandfont">  
+                          Instruments
+                    </h5>   
+
+                  <div > <!-- start new instrument-->
+               
+                    <a class="btn btn-secondary" asp-action="Edit" asp-controller="Users" asp-route-id="@userId">Edit</a>
+     
+                    </div> 
+
+
+
+
+
+                </div>
+@if (Model.UserInstruments != null){
+                @foreach (var instr in Model.UserInstruments)
+            {           
+
+                    <div class="card-text d-flex justify-content-between"> <!-- start new instrument-->
+                    <h5 class="">@Html.DisplayFor(modelItem => instr.Instrument.Name) 
+                    </h5>
+
+                    <div class="">
+                    <h6>Level <span class="badge badge-primary">@Html.DisplayFor(modelItem => instr.Level)</span></h6>
+
+
+                    </div> <!-- closing level badge div -->
+                    </div> <!-- end row with instrument and level -->  
+
+                        <!-- closing card text -->
+            }
+             <!-- closing foreach instrument -->
+}
+
+            </div>
+        </div> 
+
+@* -----------------------------  Ensembles ------------------------------ *@
+        <div class="card border-secondary col col-12 col-md-12">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">  
+                    <h5 class="card-title brandfont">  
+                          Ensembles
+                    </h5>   
+
+                  <div > <!-- start new instrument-->
+               
+                    <a class="btn btn-secondary" asp-action="Create" asp-controller="Ensembles">Add new</a>
+     
+                    </div> 
+            
+
+                </div>
+
+            @if (Model.UserEnsembles != null )
+            {
+                @foreach (var ens in Model.UserEnsembles)
+            {           
+
+                    <div class="card-text d-flex justify-content-between"> <!-- start new instrument-->
+                    <h5 class="">@Html.DisplayFor(modelItem => ens.Name) 
+                    </h5>
+                 <a class="btn btn-secondary" asp-action="Details" asp-controller="Ensemble" asp-route-id="@ens.EnsembleId">Profile</a> 
+                  @* @Html.ActionLink("Text","Details","Ensemble", new { ens.EnsembleId }, null) *@
+                    <div class="">
+                    <h6>Size @Html.DisplayFor(modelItem => ens.Size.Description)</h6>
+
+                    </div> <!-- closing level badge div -->
+                    </div> <!-- end row with instrument and level -->  
+
+                        <!-- closing card text -->
+            }
+             <!-- closing foreach instrument -->
+
+            }
+            </div>
+        </div> 
+
+
+@* -----------------------------  Posts ------------------------------ *@
+
+        <div class="card border-secondary col col-12 col-md-12">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">  
+                    <h5 class="card-title brandfont">  
+                          Posts
+                    </h5>             
+
+                  <div > <!-- start new instrument-->
+               
+                    <a class="btn btn-secondary" asp-action="Create" asp-controller="Posts">Add new</a>
+     
+                    </div> 
+
+                </div>
+                @if (Model.UserPosts != null)
+                {
+                @foreach (var pst in Model.UserPosts)
+            {           
+
+                    <div class="card-text d-flex justify-content-between"> <!-- start new instrument-->
+                    <h5 class="">@Html.DisplayFor(modelItem => pst.Title) 
+                    </h5>
+                    <a class="btn btn-secondary" asp-action="Details" asp-controller="Posts" asp-route-id="@pst.PostId">Details</a>
+     
+                    </div> <!-- end row with instrument and level -->  
+
+                        <!-- closing card text -->
+            }
+
+             <!-- closing foreach instrument -->
+                }
+
+            </div>
+        </div> 
+
+
+
+
+</div>  

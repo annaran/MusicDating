@@ -1,0 +1,15 @@
+﻿@using System.Security.Claims
+@{
+    ViewData["Title"] = "Home Page";
+    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+<ul class="list-group">
+<li class="list-group-item"><a asp-controller="Users" asp-action="Details" asp-route-id="@userId" >My profile</a></li>
+<li class="list-group-item"><a asp-controller="Ensembles" asp-action="Index" >Browse Ensembles</a></li>
+<li class="list-group-item"><a asp-controller="Users" asp-action="Index" >Browse Musicians</a></li>
+<li class="list-group-item"><a asp-controller="Posts" asp-action="Index" >Browse Posts</a></li>
+</ul>
+</div>

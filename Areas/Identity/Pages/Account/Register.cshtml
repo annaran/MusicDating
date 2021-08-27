@@ -1,0 +1,68 @@
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Create profile";
+}
+
+    <h1 class="headerfont">@ViewData["Title"]</h1>
+
+
+
+<div class="row">
+    <div class="col-12 col-md-12">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+          
+            <hr />
+            
+            <div class="row">
+                <div class="form-group col-6">
+                    <input asp-for="Input.FirstName" class="form-control" placeholder="Firstname"/>
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6">
+                    <input asp-for="Input.LastName" class="form-control" placeholder="Lastname"/>
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+               
+                <input asp-for="Input.Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm password" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+@*                 <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.AcceptTerms">
+                            <input asp-for="Input.AcceptTerms" />
+                            
+                            I accept <a href="#">Terms and Conditions</a>
+                        </label>
+                    </div>
+              
+                        <input class="checkbox" type="checkbox" id="gridCheck">
+                  <label class="form-check-label" for="gridCheck">
+        Subscribe to newsletter
+      </label>
+                   
+                </div> *@
+<p align="center">
+            <button type="submit" class="btn btn-primary  ">Create profile</button>
+            </p>
+        </form>
+    </div>
+ 
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

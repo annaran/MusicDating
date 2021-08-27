@@ -1,0 +1,130 @@
+@model MusicDating.Models.ViewModels.UserInstrumentVm
+
+
+@{
+ViewData["Title"] = "Search user by instrument";
+}
+
+
+
+<h1>Search Musicians</h1>
+
+
+
+<form asp-controller="Users" asp-action="Index" method="post">
+    <p>
+    <div class="form-group">
+        <select class="form-control" asp-for="SelectedInstrument" asp-items="Model.Instruments" onchange="this.form.submit()">
+            <option value="">Select instrument</option>
+        </select>
+
+        <select class="form-control" asp-for="SelectedGenre" asp-items="Model.Genres" onchange="this.form.submit()">
+            <option value="">Select genre</option>
+        </select>
+
+        <select class="form-control" asp-for="SelectedLevelMin" onchange="this.form.submit()">
+
+            <option value=1>Select min level</option>
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+            <option value=6>6</option>
+            <option value=7>7</option>
+            <option value=8>8</option>
+            <option value=9>9</option>
+            <option value=10>10</option>
+        </select>
+
+
+        <select class="form-control" asp-for="SelectedLevelMax" onchange="this.form.submit()">
+
+            <option value=10>Select max level</option>
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+            <option value=6>6</option>
+            <option value=7>7</option>
+            <option value=8>8</option>
+            <option value=9>9</option>
+            <option value=10>10</option>
+        </select>
+
+
+
+    </div>
+
+    </p>
+</form>
+
+<div class="container">
+ 
+
+        @foreach (var usr in Model.Users)
+        {
+        <div class="card border-secondary col col-12 col-md-12">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  
+  
+
+                    <h5 class="card-title brandfont">  
+                          @Html.DisplayFor(modelItem => usr.FirstName) @Html.DisplayFor(modelItem => usr.LastName)
+                    </h5>
+               
+                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@usr.Id">Profile</a>
+                </div>
+                  
+                @foreach (var instr in Model.UserInstruments)
+                {
+                 
+
+                @if (usr.Id == instr.ApplicationUserId)
+                {
+                <div class="card-text d-flex justify-content-between"> <!-- start new instrument-->
+                <h5 class="">@Html.DisplayFor(modelItem => instr.Instrument.Name) 
+                </h5>
+
+                <div class="">
+                <h6>Level <span class="badge badge-primary">@Html.DisplayFor(modelItem => instr.Level)</span></h6>
+
+
+                </div> <!-- closing level badge div -->
+                </div> <!-- end row with instrument and level -->
+                 <div class=""> <!-- row with genres -->
+                 <div>
+                     <div class="card-text text-left ">
+                        @foreach (var genre in Model.UserInstrumentGenres)
+                        {
+                         
+                        @if (genre.InstrumentId == instr.InstrumentId && genre.ApplicationUserId == instr.ApplicationUserId)
+                        {
+                            <span class="badge badge-warning">@Html.DisplayFor(modelItem => genre.Genre.Name)</span>
+                        } <!-- closing if genre -->
+                        
+                        } <!-- closing foreach genre -->
+                        </div> <!-- closing genre card text -->
+                    </div>
+                    </div><!-- end row with genres -->
+ 
+                } <!-- closing if instrument -->
+
+
+
+                    <!-- closing card text -->
+                } <!-- closing foreach instrument -->
+
+ 
+
+
+                
+            </div>
+        </div> 
+    
+        } <!-- closing foreach user -->
+ 
+      
+</div>  

@@ -1,0 +1,114 @@
+@model MusicDating.Models.Entities.Ensemble
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Ensemble</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EnsembleId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Picture" class="control-label"></label>
+                <input asp-for="Picture" class="form-control" />
+                <span asp-validation-for="Picture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Homepage" class="control-label"></label>
+                <input asp-for="Homepage" class="form-control" />
+                <span asp-validation-for="Homepage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Postcode" class="control-label"></label>
+                <input asp-for="Postcode" class="form-control" />
+                <span asp-validation-for="Postcode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Size" class="control-label"></label>
+                <select asp-for="SizeId" class="form-control" asp-items="ViewBag.SizeId"></select>
+                <span asp-validation-for="SizeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PracticeFrequency" class="control-label"></label>
+                <select asp-for="PracticeFrequencyId" class="form-control" asp-items="ViewBag.PracticeFrequencyId"></select>
+                <span asp-validation-for="PracticeFrequencyId" class="text-danger"></span>
+            </div>
+
+
+<div class="form-group">
+    <label asp-for="EnsembleGenres" class="control-label"></label>
+    <div class="col-md-offset-2 col-md-10">
+        <table>
+            <tr>
+                @{
+                    int cnt = 0;
+                    List<MusicDating.Models.ViewModels.AssignedGenreDataVm> genres = ViewBag.Genres;
+
+                    foreach (var genre in genres)
+                    {
+                        if (cnt++ % 3 == 0)
+                        {
+                            @:</tr><tr>
+                        }
+                        @:<td>
+                            <input type="checkbox"
+                                   name="selectedGenres"
+                                   value="@genre.GenreId"
+                                   @(Html.Raw(genre.Assigned ? "checked=\"checked\"" : "")) />
+                                   @genre.GenreId @:  @genre.Name
+                        @:</td>
+                    }
+                    @:</tr>
+                }
+        </table>
+    </div>
+</div>
+
+
+
+
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PlayRegular" /> @Html.DisplayNameFor(model => model.PlayRegular)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PlayProject" /> @Html.DisplayNameFor(model => model.PlayProject)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
